@@ -43,6 +43,13 @@ app.get('/test', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/test.html'));
 });
 
+app.post('/webhook', express.json(), async (req, res) => {
+  console.log(req.body);
+  return res.status(200).json({
+    data: req.body,
+  })
+})
+
 const port = process.env.PARSE_PORT || 1337;
 const httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
