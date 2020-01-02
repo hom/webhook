@@ -1,11 +1,11 @@
 const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+const { exec } = require('child_process');
 
 async function webhook(req, res) {
   const { repository } = req.body;
-  let webhook;
+  let result;
   try {
-    webhook = await new Parse.Query('Hook').equalTo('name', repository.full_name).first();
+    result = await new Parse.Query('Hook').equalTo('name', repository.full_name).first();
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -13,23 +13,24 @@ async function webhook(req, res) {
     });
   }
 
-  if (!webhook) {
+  if (!result) {
     return res.status(200).json({
       message: `can not find webhook script of ${repository.full_name}`,
     });
   }
-  const { script } = webhook;
-  const { stdout, stderr } = await exec(script);
-  if (stderr) {
-    console.error(stderr);
-    return res.status(501).json({
-      message: `webhook of ${repository.full_name} execute error.`,
-      error: stderr,
-    });
-  }
+
+  const { script } = result.toJSON();
+  // start execute webhook script
+  exec(script, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`执行的错误: ${error}`);
+    }
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
+  });
+
   return res.status(200).json({
-    message: `webhook of ${repository.full_name} execute success.`,
-    data: stdout,
+    message: `webhook of ${repository.full_name} is running.`,
   });
 }
 
