@@ -1,6 +1,7 @@
 const env = require('dotenv').config();
 const express = require('express');
 const ParseServer = require('parse-server').ParseServer;
+const Parse = require('parse');
 const path = require('path');
 const webhook = require('./src/webhook');
 
@@ -55,3 +56,7 @@ httpServer.listen(port, function() {
 
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
+
+// initialize parse sdk
+Parse.initialize(process.env.PARSE_APPID, process.env.PARSE_JAVASCRIPT_KEY, process.env.PARSE_MASTER_KEY,);
+Parse.serverURL = `http://localhost:${process.env.PARSE_PORT || 1337}/${process.env.PARSE_MOUNT || '/parse'}`
