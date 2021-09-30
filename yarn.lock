@@ -2570,9 +2570,9 @@ packet-reader@1.0.0:
   integrity sha512-HAKu/fG3HpHFO0AA8WE8q2g+gBJaZ9MG7fcKk+IJPLTGAD6Psw4443l+9DGRbOIh3/aXr7Phy0TjilYivJo5XQ==
 
 parse-server@*:
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/parse-server/-/parse-server-4.10.3.tgz#6160ca189894bb453e41dfd26fe5e1d7ae69cec0"
-  integrity sha512-vg4ViF+mRGGUOJV43aaTIO6BIoKoV6bR1+/qCNal56cqd4YDW63s6vY/2cuXSy1V5rJHfVJsg6LWN7IVPXirKg==
+  version "4.10.4"
+  resolved "https://registry.yarnpkg.com/parse-server/-/parse-server-4.10.4.tgz#93345bfa1867acc548598944078785451bbef655"
+  integrity sha512-43WseBkTqs+UsZfX83msJkFloX94POeGonbfpemuUJJD/ujJeHSxQbu/6c1uqzKxaYB2bd+apoKDi98ODtg9TQ==
   dependencies:
     "@apollographql/graphql-playground-html" "1.6.26"
     "@graphql-tools/links" "6.2.5"
